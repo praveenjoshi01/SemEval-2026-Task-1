@@ -1,0 +1,8 @@
+gif_cache/
+venv/
+.env
+__pycache__/
+*.pyc
+.DS_Store
+submission.zip
+output/*.tsv
