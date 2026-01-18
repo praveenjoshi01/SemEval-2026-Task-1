@@ -195,7 +195,7 @@ def main():
     else:
         # Process Selection
         row_idx = selected_rows[0]
-        selected_row = input_df.iloc[row_idx]
+        selected_row = display_df.iloc[row_idx]
         
         # Check if row selection changed to clear test results if needed
         if st.session_state.get('last_selected_row_idx') != row_idx:
@@ -228,6 +228,13 @@ def main():
                     for col in display_df.columns:
                         if col not in ['id', 'text', 'url']:
                             st.markdown(f"**{col.capitalize()}:** {selected_row[col]}")
+                
+                # Show Previous Response if available
+                prev_text = selected_row.get('text', "")
+                if pd.notna(prev_text) and prev_text:
+                    st.markdown("---")
+                    st.markdown("**Previous Response:**")
+                    st.info(prev_text)
 
         with col_edit:
             new_template = st.text_area("Jinja2 Template Editor", value=st.session_state.template_content, height=250)
